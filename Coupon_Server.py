@@ -14,7 +14,6 @@ def loadCoupons(coupons):
 #Output: Discounted price as string. If code not found, return error
 def applyCoupon(coupons, code, original):
     for i in coupons:
-        print(i[1])
         if i[1] == code:
             return str(original - (original * (int(i[2])/100))) #Finds the amount of that percentage, then subtracts that much from the original
     return "Code Not Found"
@@ -35,8 +34,8 @@ while True:
         if message == "q":
             break
         #decode is a list: [coupon code, original price]
-        decode = message.split(", ")
-        response = applyCoupon(coupons, decode[0], decode[1])
+        decode = message.decode().split(", ")
+        response = applyCoupon(coupons, decode[0], float(decode[1]))
         time.sleep(1)
         socket.send_string(response)
 
